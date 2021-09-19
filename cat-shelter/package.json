@@ -10,6 +10,10 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
-    "nodemon": "^2.0.12"
+    "nodemon": "^2.0.12",
+    "uniqid": "^5.4.0"
+  },
+  "dependencies": {
+    "formidable": "^1.2.2"
   }
 }
