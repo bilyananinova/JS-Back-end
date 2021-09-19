@@ -95,7 +95,11 @@ let app = http.createServer((req, res) => {
 
         res.write(body);
     } else if (req.url.startsWith('/cats-edit/') && req.method == 'POST') {
-        edit(req)
+        let cat = fs.readFileSync('./database/cats.json').toString();
+        let id = querystring.parse(req.url, '/').id;
+        cat = JSON.parse(cat).cats.find(c => c.id == id);
+
+        edit(req, cat)
 
         res.writeHead(302, {
             'Location': '/'
@@ -123,7 +127,9 @@ let app = http.createServer((req, res) => {
         res.write(body);
     } else if (req.url.startsWith('/cats-find-new-home') && req.method == 'POST') {
 
-        deleteCat(req.url.substring(20));
+        let id = querystring.parse(req.url, '/').id;
+
+        deleteCat(id);
         res.writeHead(302, {
             'Location': '/'
         });
