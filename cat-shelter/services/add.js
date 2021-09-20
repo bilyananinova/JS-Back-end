@@ -1,5 +1,5 @@
-let formidable = require('formidable');
 let fs = require('fs');
+let formidable = require('formidable');
 let uniqid = require('uniqid');
 
 let dbBreeds = require('../database/breeds.json');

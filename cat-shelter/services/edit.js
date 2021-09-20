@@ -14,9 +14,11 @@ function edit(req, cat) {
             fields.img = files.image.name;
         }
 
-        dbCats.cats.push(fields);
-        let index = dbCats.cats.findIndex(c => c.id == cat.id)
-        dbCats.cats.splice(index, 1);
+        if (cat) {
+            dbCats.cats.push(fields);
+            let index = dbCats.cats.findIndex(c => c.id == cat.id);
+            dbCats.cats.splice(index, 1);
+        }
         let result = JSON.stringify(dbCats, '', 2);
         return fs.writeFileSync('./database/cats.json', result);
     });
