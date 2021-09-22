@@ -10,6 +10,7 @@ app.use((req, res, next) => {
     setUpHbs(app);
     next();
 });
+
 app.use(express.static('styles'));
 app.use(router);
 

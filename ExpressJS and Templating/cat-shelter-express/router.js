@@ -1,23 +1,12 @@
 let express = require('express');
 let router = express.Router();
 
-router.get('/', (req, res) => {
-    res.render('index');
-});
+let catController = require('./handlers/catController.js');
 
-router.get('/cats/add-breed', (req, res) => {
-    res.render('addBreed');
-});
+router.get('/', catController);
+router.get('/cats/add-breed', catController);
+router.get('/cats/add-cat', catController);
+router.get('/cats-edit/:id?', catController);
+router.get('/cats-find-new-home/:id?', catController);
 
-router.get('/cats/add-cat', (req, res) => {
-    res.render('addCat');
-});
-
-router.get('/cats-edit/:id?', (req, res) => {
-    res.render('editCat');
-});
-
-router.get('/cats-find-new-home/{{id}}', (req, res) => {
-    res.render('catShelter');
-});
 module.exports = router;
