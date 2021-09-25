@@ -23,6 +23,8 @@ router
 
 router
     .get('/cats-find-new-home/:id?', shelterController)
-    .post('/cats-find-new-home/:id?', shelterController)
+    .post('/cats-find-new-home/:id?', shelterController);
+
+router.get('/search', homeController);
 
 module.exports = router

@@ -9,7 +9,7 @@ router.get('/cats/add-breed', (req, res) => {
 });
 
 router.post('/cats/add-breed', (req, res) => {
-    breeds.push(req.body.breed);
+    breeds.push(req.body.breed.toLocaleLowerCase());
     let result = JSON.stringify(breeds, '', 2)
     fs.writeFileSync('./database/breeds.json', result);
     res.redirect('/');
