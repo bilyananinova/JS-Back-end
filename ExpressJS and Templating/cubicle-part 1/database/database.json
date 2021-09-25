@@ -1,0 +1,16 @@
+[
+    {
+        "name": "Rubik Cube",
+        "description": "Standart Rubik Cube",
+        "imageUrl": "https://www.popsci.com/uploads/2019/03/18/FKKPS6IJJQCML5WPHMBHF7GWYI.jpg",
+        "difficulty": "3",
+        "id": "6w24q64gktzt8xbj"
+    },
+    {
+        "name": "Easy Rubik Cube",
+        "description": "Very easy Rubik Cube",
+        "imageUrl": "https://www.artnhobby.ie/media/catalog/product/cache/2/image/9df78eab33525d08d6e5fb8d27136e95/j/a/ja9642-1.jpg",
+        "difficulty": "2",
+        "id": "6w24q64gktfsfccs"
+    }
+]
