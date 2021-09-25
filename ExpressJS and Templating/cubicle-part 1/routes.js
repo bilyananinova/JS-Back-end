@@ -1,4 +1,4 @@
-let { homeRender, aboutRender, search } = require('./controllers/homeController');
+let { homeRender, aboutRender, searchController } = require('./controllers/homeController');
 let { createRender, detailsRender, creteCube } = require('./controllers/productController');
 
 module.exports = (app) => {
@@ -12,7 +12,7 @@ module.exports = (app) => {
 
     app.get('/details/:id', detailsRender);
 
-    app.get('/search', search);
+    app.get('/search', searchController);
 
     app.get('*', (req, res) => {
         res.render('404');

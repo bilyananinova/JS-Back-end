@@ -1,5 +1,5 @@
-let Cube = require('../models/Cube');
-let db = require('../database/database.json');
+let create = require("../services/create");
+let { details } = require("../services/get");
 
 function createRender(req, res) {
     res.render('create');
@@ -7,15 +7,12 @@ function createRender(req, res) {
 
 function creteCube(req, res) {
     let { name, description, imageUrl, difficulty } = req.body;
-    let cube = new Cube(name, description, imageUrl, difficulty);
-    db.push(cube);
+    create(name, description, imageUrl, difficulty);
     res.redirect('/');
 }
 
 function detailsRender(req, res) {
-    let id = req.params.id;
-    let cube = db.find(c => c.id == id);
-    console.log(cube);
+    let cube = details(req.params.id);
     res.render('details', { cube });
 }
 
