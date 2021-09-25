@@ -1,16 +1,1 @@
-[
-    {
-        "name": "Radka",
-        "img": "",
-        "description": "Some description",
-        "breed": "Unknown",
-        "id": "f415d15d1f"
-    },
-    {
-        "name": "Radka",
-        "img": "",
-        "description": "Some description",
-        "breed": "Unknown",
-        "id": "f415d15d1f5464"
-    }
-]
+[{"name":"Bilyana","description":"change description","image":"","breed":"Maine Coon","id":"6w24qfl4ktzfzf5w"}]

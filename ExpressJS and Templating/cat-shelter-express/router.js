@@ -1,12 +1,27 @@
 let express = require('express');
 let router = express.Router();
 
-let catController = require('./handlers/catController.js');
+let homeController = require('./handlers/homeController.js');
+let addBreedController = require('./handlers/addBreedController.js');
+let addCatController = require('./handlers/addCatController.js');
+let editCatController = require('./handlers/editCatController.js');
 
-router.get('/', catController);
-router.get('/cats/add-breed', catController);
-router.get('/cats/add-cat', catController);
-router.get('/cats-edit/:id?', catController);
-router.get('/cats-find-new-home/:id?', catController);
+router.get('/', homeController);
 
-module.exports = router;
+router
+    .get('/cats/add-breed', addBreedController)
+    .post('/cats/add-breed', addBreedController);
+
+router
+    .get('/cats/add-cat', addCatController)
+    .post('/cats/add-cat', addCatController);
+
+router
+    .get('/cats-edit/:id?', editCatController)
+    .post('/cats-edit/:id?', editCatController);
+
+router.get('/cats-find-new-home/:id?', (req, res) => {
+    res.render('catShelter');
+});
+
+module.exports = router
