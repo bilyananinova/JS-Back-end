@@ -5,6 +5,7 @@ let homeController = require('./handlers/homeController.js');
 let addBreedController = require('./handlers/addBreedController.js');
 let addCatController = require('./handlers/addCatController.js');
 let editCatController = require('./handlers/editCatController.js');
+let shelterController = require('./handlers/shelterController.js');
 
 router.get('/', homeController);
 
@@ -20,8 +21,8 @@ router
     .get('/cats-edit/:id?', editCatController)
     .post('/cats-edit/:id?', editCatController);
 
-router.get('/cats-find-new-home/:id?', (req, res) => {
-    res.render('catShelter');
-});
+router
+    .get('/cats-find-new-home/:id?', shelterController)
+    .post('/cats-find-new-home/:id?', shelterController)
 
 module.exports = router

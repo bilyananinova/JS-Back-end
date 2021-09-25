@@ -1,7 +1,6 @@
 let fs = require('fs');
 let express = require('express');
 let cats = require('../database/cats.json');
-const { json } = require('express');
 
 let router = express.Router();
 
