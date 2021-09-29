@@ -1,22 +1,32 @@
 {
   "cats": [
     {
-      "name": "Garry",
-      "description": "new description about Garry",
-      "breed": "Birman",
-      "id": "6w24qgfkktrkg05w"
-    },
-    {
       "name": "Radka",
-      "description": "new description",
+      "description": "She is awesome!!",
       "breed": "Birman",
-      "id": "6w24q628ktrm71ue"
+      "id": "6w24q2n4ku5w1wvn",
+      "image": "seal-point-birman-cat.jpeg"
     },
     {
       "name": "Frank",
+      "description": "Royalty ",
+      "breed": "Maine Coon",
+      "id": "6w24qbdcku5w5fq5",
+      "image": "iStock-1031592516.jpg"
+    },
+    {
+      "name": "Garry",
       "description": "",
-      "breed": "Birman",
-      "id": "6w24qdssktrmccjb"
+      "breed": "Ragamuffin",
+      "id": "6w24q95kku5w5wqj",
+      "image": "8b6e2074798c3e2b2b450d351a0275e0.jpg"
+    },
+    {
+      "name": "Goldy",
+      "description": "",
+      "breed": "Munchkin",
+      "id": "6w24qd1cku5w84qw",
+      "image": "download.jpeg"
     }
   ]
 }

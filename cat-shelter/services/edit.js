@@ -5,14 +5,14 @@ let uniqid = require('uniqid');
 let dbCats = require('../database/cats.json');
 
 function edit(req, cat) {
-    let form = formidable.IncomingForm();
+    let form = new formidable.IncomingForm();
 
     form.parse(req, (err, fields, files) => {
-        fields.id = uniqid();
-
-        if (files['image']) {
-            fields.img = files.image.name;
+        if(err) {
+            console.log(err);
         }
+
+        fields.id = uniqid();
 
         if (cat) {
             dbCats.cats.push(fields);

@@ -11,14 +11,13 @@ function editCatTemp(req, res) {
         } else {
             let id = querystring.parse(req.url, '/').id;
             let cat = catList.cats.find(c => c.id == id);
-
             let result = `
             <label for="name">Name</label>
             <input name="name" type="text" id="name" value="${cat.name}">
             <label for="description">Description</label>
             <textarea name="description" id="description">${cat.description}</textarea>
             <label for="image">Image</label>
-            <input type="file" id="image">
+            <input type="file" id="image" value="${cat.image}">
             <label for="group">Breed</label>
             <select name="breed"  id="group">
                 <option value="${cat.breed}">${cat.breed}</option>

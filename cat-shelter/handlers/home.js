@@ -1,15 +1,17 @@
 let fs = require('fs');
+let path = require('path');
 
 let catsList = require('../database/cats.json');
 
 function homeTemp(req, res) {
     fs.readFile('./views/home/index.html', (err, data) => {
+
         if (err) {
             throw err;
         } else {
             let card = catsList.cats.map(c =>
                 `<li>
-                    <img src="https://cdn.pixabay.com/photo/2015/03/27/13/16/cat-694730_1280.jpg" alt="${c.name}">
+                    <img src="${path.join(path.relative(__dirname, 'images') + '/' + c.image)}" alt="${c.name}">
                     <h3>${c.name}</h3>
                     <p><span>Breed: </span>${c.breed}</p>
                     <p><span>Description: </span>${c.description}</p>
@@ -19,7 +21,7 @@ function homeTemp(req, res) {
                     </ul>
                  </li>`);
 
-            data = data.toString().replace('{{catCard}}', card);
+            data = data.toString().replace('{{catCard}}', card.join(''));
             res.write(data);
             res.end();
         }

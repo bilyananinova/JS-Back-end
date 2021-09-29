@@ -1,4 +1,5 @@
 let fs = require('fs');
+let path = require('path');
 let querystring = require('querystring');
 
 let catList = require('../database/cats.json');
@@ -13,7 +14,7 @@ function catShelterTemp(req, res) {
             let cat = catList.cats.find(c => c.id == id);
 
             let result = `
-                <img src="https://cdn.pixabay.com/photo/2015/03/27/13/16/cat-694730_1280.jpg" alt="${cat.name}">
+                <img src="${path.join(path.relative(__dirname, 'images') + '/' + cat.image)}" alt="${cat.name}">
                 <label for="name">Name</label>
                 <input type="text" id="name" value="${cat.name}" disabled>
                 <label for="description">Description</label>

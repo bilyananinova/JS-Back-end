@@ -18,11 +18,11 @@ function addBreed(req) {
 
 function addCat(req) {
 
-    let form = formidable.IncomingForm();
+    let form = new formidable.IncomingForm();
 
     form.parse(req, (err, fields, files) => {
         fields.id =  uniqid();
-        fields.img = files.image.name;
+        fields.image = files.image.name;
         dbCats.cats.push(fields);
         let result = JSON.stringify(dbCats, '', 2);
         return fs.writeFileSync('./database/cats.json', result);
