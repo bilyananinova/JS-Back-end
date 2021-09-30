@@ -1,11 +1,12 @@
 let express = require('express');
+let path = require('path')
 let setUpHbs = require('./config/express-hbs.js');
 
 let port = 3000;
 let app = express();
 
 setUpHbs(app);
-app.use(express.static('styles'));
+app.use('/static', express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(require('./router'));
