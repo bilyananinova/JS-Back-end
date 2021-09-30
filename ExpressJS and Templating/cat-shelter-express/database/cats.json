@@ -2,8 +2,22 @@
   {
     "name": "Radka",
     "description": "Some description",
-    "image": "8b6e2074798c3e2b2b450d351a0275e0.jpg",
+    "image": "muffin2.jpg",
     "breed": "Ragamuffin",
     "id": "6w24qgekku78kslt"
+  },
+  {
+    "name": "Garry",
+    "description": "Very cute!",
+    "image": "iStock-1031592516.jpg",
+    "breed": "Maine Coon",
+    "id": "6w24q2iwku7cqa6o"
+  },
+  {
+    "name": "Frank",
+    "description": "",
+    "image": "download.jpg",
+    "breed": "Birman",
+    "id": "6w24qcq0ku7csf5x"
   }
 ]
