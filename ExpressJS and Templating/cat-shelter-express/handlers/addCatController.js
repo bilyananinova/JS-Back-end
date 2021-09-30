@@ -11,12 +11,7 @@ router.get('/cats/add-cat', (req, res) => {
 });
 
 router.post('/cats/add-cat', (req, res) => {
-    let { name, description, image, breed } = req.body;
-    let cat = new Cat(name, description, image, breed);
-    cats.push(cat);
-    cats = JSON.stringify(cats, '', 2)
-    fs.writeFileSync('./database/cats.json', cats);
-    res.redirect('/');
+
 });
 
 module.exports = router;
