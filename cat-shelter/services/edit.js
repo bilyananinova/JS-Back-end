@@ -8,7 +8,7 @@ function edit(req, cat) {
     let form = new formidable.IncomingForm();
 
     form.parse(req, (err, fields, files) => {
-        if(err) {
+        if (err) {
             console.log(err);
         }
 

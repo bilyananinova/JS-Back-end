@@ -1,13 +1,6 @@
 {
   "cats": [
     {
-      "name": "Radka",
-      "description": "She is awesome!!",
-      "breed": "Birman",
-      "id": "6w24q2n4ku5w1wvn",
-      "image": "seal-point-birman-cat.jpeg"
-    },
-    {
       "name": "Frank",
       "description": "Royalty ",
       "breed": "Maine Coon",
@@ -27,6 +20,12 @@
       "breed": "Munchkin",
       "id": "6w24qd1cku5w84qw",
       "image": "download.jpeg"
+    },
+    {
+      "name": "Radka",
+      "description": "She is awesome!!",
+      "breed": "Birman",
+      "id": "6w24q97wku7dym37"
     }
   ]
 }

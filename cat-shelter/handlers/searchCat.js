@@ -1,4 +1,5 @@
 let fs = require('fs');
+let path = require('path');
 
 let search = require('../services/search.js');
 
@@ -11,7 +12,7 @@ function searchResults(req, res) {
         } else {
             let cards = cats.map(c => `
             <li>
-                <img src="https://ichef.bbci.co.uk/news/976/cpsprodpb/12A9B/production/_111434467_gettyimages-1143489763.jpg" alt="Black Cat">
+                <img src="${path.join(path.relative(__dirname, 'images') + '/' + c.image)}" alt="${c.name}">
                 <h3>${c.name}</h3>
                 <p><span>Breed: </span>${c.breed}</p>
                 <p><span>Description: </span>${c.description}</p>

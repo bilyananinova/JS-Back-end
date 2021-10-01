@@ -17,7 +17,7 @@ function editCatTemp(req, res) {
             <label for="description">Description</label>
             <textarea name="description" id="description">${cat.description}</textarea>
             <label for="image">Image</label>
-            <input type="file" id="image" value="${cat.image}">
+            <input type="file" id="image">
             <label for="group">Breed</label>
             <select name="breed"  id="group">
                 <option value="${cat.breed}">${cat.breed}</option>
