@@ -1,23 +1,23 @@
 [
-  {
-    "name": "Radka",
-    "description": "Some description",
-    "image": "muffin2.jpg",
-    "breed": "Ragamuffin",
-    "id": "6w24qgekku78kslt"
-  },
-  {
-    "name": "Garry",
-    "description": "Very cute!",
-    "image": "iStock-1031592516.jpg",
-    "breed": "Maine Coon",
-    "id": "6w24q2iwku7cqa6o"
-  },
-  {
-    "name": "Frank",
-    "description": "",
-    "image": "download.jpg",
-    "breed": "Birman",
-    "id": "6w24qcq0ku7csf5x"
-  }
+    {
+        "name": "Radka",
+        "description": "Some description",
+        "image": "muffin2.jpg",
+        "breed": "Ragamuffin",
+        "id": "6w24qgekku78kslt"
+    },
+    {
+        "name": "Garry",
+        "description": "Very cute!",
+        "image": "iStock-1031592516.jpg",
+        "breed": "Maine Coon",
+        "id": "6w24q2iwku7cqa6o"
+    },
+    {
+        "name": "Frank",
+        "description": "Some description here",
+        "breed": "Birman",
+        "image": "download.jpg",
+        "id": "6w24qcq0ku7csf5x"
+    }
 ]
