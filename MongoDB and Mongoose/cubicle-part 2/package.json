@@ -1,0 +1,19 @@
+{
+  "name": "04.-cubicle-workshop-part-2-resources",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "SET NODE_ENV=development&& nodemon ./index.js",
+    "prod": "SET NODE_ENV=production&& node ./index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-handlebars": "^5.3.4",
+    "mongoose": "^6.0.8",
+    "nodemon": "^2.0.13"
+  }
+}

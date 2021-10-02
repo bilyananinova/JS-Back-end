@@ -5,6 +5,7 @@ let config = require('./config/config.js');
 
 require('./config/express.js')(app);
 require('./config/exphbs.js')(app);
+require('./config/database.js')(app);
 
 app.use(require('./routes.js'));
 
