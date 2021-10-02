@@ -1,7 +1,7 @@
 let express = require('express');
 let router = express.Router();
 
-let { createCube } = require('../services/cubeServices.js');
+let { createCube, getById } = require('../services/cubeServices.js');
 
 router.get('/create', (req, res) => {
     res.render('create');
@@ -20,5 +20,11 @@ router.post('/create', async (req, res) => {
         return `${err}`;
     }
 });
+
+router.get('/:id?', async (req, res) => {
+
+    let cube = await getById(req.params.id)
+    res.render('details', { cube });
+})
 
 module.exports = router;
