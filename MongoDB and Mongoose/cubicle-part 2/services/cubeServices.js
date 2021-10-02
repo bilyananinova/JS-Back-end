@@ -1,5 +1,9 @@
 let Cube = require('../models/Cube.js');
 
+function getAll() {
+    return Cube.find().lean();
+}
+
 function createCube(name, description, imageUrl, difficulty) {
 
     let cube = new Cube({
@@ -13,5 +17,6 @@ function createCube(name, description, imageUrl, difficulty) {
 }
 
 module.exports = {
+    getAll,
     createCube,
 }
