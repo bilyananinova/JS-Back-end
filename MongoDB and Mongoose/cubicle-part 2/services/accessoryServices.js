@@ -1,6 +1,10 @@
 let Accessory = require('../models/Accessory');
 
-async function createAcc(name, description, imageUrl) {
+function getAll() {
+    return Accessory.find().lean();
+}
+
+function createAcc(name, description, imageUrl) {
     let accessory = new Accessory({
         name,
         description,
@@ -10,6 +14,12 @@ async function createAcc(name, description, imageUrl) {
     return accessory.save();
 }
 
+function getAllNotIn(id) {
+    return Accessory.find().where('_id').nin(id).lean();
+}
+
 module.exports = {
+    getAll,
     createAcc,
+    getAllNotIn
 }

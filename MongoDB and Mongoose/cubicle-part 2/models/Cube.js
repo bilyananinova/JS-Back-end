@@ -1,5 +1,4 @@
 let mongoose = require('mongoose');
-let Accessory = require('./Accessory');
 
 let cubeSchema = new mongoose.Schema({
     id: mongoose.Types.ObjectId,

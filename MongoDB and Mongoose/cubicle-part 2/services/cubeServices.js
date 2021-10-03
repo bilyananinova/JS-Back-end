@@ -1,15 +1,15 @@
 let Accessory = require('../models/Accessory.js');
 let Cube = require('../models/Cube.js');
 
-async function getAll() {
+function getAll() {
     return Cube.find().lean();
 }
 
-async function getById(id) {
-    return Cube.findById({ _id: id }).lean();
+function getById(id) {
+    return Cube.findById({ _id: id }).populate('accessories').lean();
 }
 
-async function createCube(name, description, imageUrl, difficulty) {
+function createCube(name, description, imageUrl, difficulty) {
 
     let cube = new Cube({
         name,
