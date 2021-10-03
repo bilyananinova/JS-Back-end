@@ -1,10 +1,15 @@
-let mongoose = requere('mongoose');
+let mongoose = require('mongoose');
 
 let accessorySchema = new mongoose.Schema({
     id: mongoose.Types.ObjectId,
     name: {
         type: String,
         required: true
+    },
+    description: {
+        type: String,
+        required: true,
+        maxlength: 500,
     },
     imageUrl: {
         type: String,
@@ -15,11 +20,6 @@ let accessorySchema = new mongoose.Schema({
             },
             message: props => `${props.value} is not a valid address!`
         },
-    },
-    description: {
-        type: String,
-        required: true,
-        maxlength: 500,
     }
 });
 

@@ -1,4 +1,5 @@
 let mongoose = require('mongoose');
+let Accessory = require('./Accessory');
 
 let cubeSchema = new mongoose.Schema({
     id: mongoose.Types.ObjectId,
@@ -26,7 +27,13 @@ let cubeSchema = new mongoose.Schema({
         required: true,
         min: 1,
         max: 6
-    }
+    },
+    accessories: [
+        {
+            type: mongoose.Types.ObjectId,
+            ref: "Accessory"
+        }
+    ]
 });
 
 module.exports = mongoose.model('Cube', cubeSchema);
