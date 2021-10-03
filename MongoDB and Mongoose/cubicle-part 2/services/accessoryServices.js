@@ -15,7 +15,10 @@ function createAcc(name, description, imageUrl) {
 }
 
 function getAllNotIn(id) {
-    return Accessory.find().where('_id').nin(id).lean();
+    return Accessory.find()
+        .where('_id')
+        .nin(id)
+        .lean();
 }
 
 module.exports = {

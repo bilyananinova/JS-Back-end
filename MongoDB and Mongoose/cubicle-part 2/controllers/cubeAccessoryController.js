@@ -2,12 +2,12 @@ let express = require('express');
 let router = express.Router({ mergeParams: true });
 
 let { getById, attachAccessory } = require('../services/cubeServices')
-let { getAll } = require('../services/accessoryServices')
+let { getAll, getAllNotIn } = require('../services/accessoryServices')
 
 router.get('/attach', async (req, res) => {
     let cube = await getById(req.params.id);
-    let accessories = await getAll();
-    
+    let accessories = await getAllNotIn(cube.accessories.map(x => x._id));
+
     res.render('attachAccessory', { cube, accessories });
 });
 
