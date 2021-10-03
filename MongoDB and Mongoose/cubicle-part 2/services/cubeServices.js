@@ -30,9 +30,28 @@ async function attachAccessory(cubeId, accId) {
     return cube.save();
 }
 
+async function search(name, from, to) {
+    let cubes = await Cube.find().lean();
+
+    if (name) {
+        cubes = cubes.filter(x => x.name.toLowerCase().includes(name.toLowerCase()));
+    }
+
+    if (from) {
+        cubes = cubes.filter(x => x.difficulty >= from);
+    }
+
+    if (to) {
+        cubes = cubes.filter(x => x.difficulty <= to);
+    }
+
+    return cubes;
+}
+
 module.exports = {
     getAll,
     getById,
     createCube,
     attachAccessory,
+    search
 }
