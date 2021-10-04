@@ -11,5 +11,8 @@ router.use('/', homeController);
 router.use('/cube', productController);
 router.use('/accessory', accessoryController);
 router.use('/about', homeController);
+router.get('*', (req, res) => {
+    res.render('404');
+});
 
 module.exports = router;
