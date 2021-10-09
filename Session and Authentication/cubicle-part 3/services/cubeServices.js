@@ -1,5 +1,4 @@
 let Cube = require('../models/Cube.js');
-let Accessory = require('../models/Accessory.js');
 
 async function getAll() {
     return await Cube.find({}).lean();
@@ -7,11 +6,6 @@ async function getAll() {
 
 async function getById(id) {
     return await Cube.findById(id).populate('accessories').lean();
-}
-
-async function outlet() {
-    let a = Accessory.find({}).lean();
-    console.log(a);
 }
 
 async function create(name, description, imageUrl, difficulty) {
@@ -25,10 +19,30 @@ async function attach(cubeId, accId) {
     return cube.save();
 }
 
+async function search(query) {
+    let { search, from, to } = query;
+
+    let cubes = await Cube.find().lean();
+    
+    if (search) {
+        cubes = cubes.filter(c => c.name.toLowerCase().includes(search.toLowerCase()));
+    }
+
+    if (from) {
+        cubes = cubes.filter(c => c.difficulty >= from);
+    }
+
+    if (to) {
+        cubes = cubes.filter(c => c.difficulty <= to);
+    }
+
+    return cubes;
+}
+
 module.exports = {
     getAll,
     getById,
-    outlet,
     create,
-    attach
+    attach,
+    search
 }

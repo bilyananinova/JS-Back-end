@@ -1,7 +1,7 @@
 let express = require('express');
 let router = express.Router();
 
-let { getAll } = require('../services/cubeServices.js');
+let { getAll, search } = require('../services/cubeServices.js');
 
 router.get('/', (req, res) => {
     getAll()
@@ -14,6 +14,9 @@ router.get('/about', (req, res) => {
     res.render('about');
 });
 
-// TODO: search
+router.get('/search', async (req, res) => {
+    let cubes = await search(req.query);
+    res.render('index', { cubes });
+});
 
 module.exports = router;
