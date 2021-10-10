@@ -1,7 +1,10 @@
 let Accessory = require('../models/Accessory.js');
 
-async function getAll() {
-    return await Accessory.find({}).lean();
+function getAll() {
+    Accessory.find({})
+        .then(accessories => {
+            return accessories;
+        })
 }
 
 async function getAllWithout(id) {
@@ -12,8 +15,8 @@ async function getAllWithout(id) {
     return acc;
 }
 
-async function create(name, description, imageUrl) {
-    let accessory = await new Accessory({ name, description, imageUrl });
+function create(name, description, imageUrl) {
+    let accessory = new Accessory({ name, description, imageUrl });
     return accessory.save();
 }
 

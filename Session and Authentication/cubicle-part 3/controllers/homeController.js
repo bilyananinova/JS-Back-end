@@ -14,9 +14,11 @@ router.get('/about', (req, res) => {
     res.render('about');
 });
 
-router.get('/search', async (req, res) => {
-    let cubes = await search(req.query);
-    res.render('index', { cubes });
+router.get('/search', (req, res) => {
+    search(req.query)
+        .then(cubes => {
+            res.render('index', { cubes });
+        });
 });
 
 module.exports = router;
