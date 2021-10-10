@@ -9,6 +9,7 @@ require('./config/exphbs.js')(app);
 require('./config/database.js')(app);
 
 app.use(cookieParser());
+app.use(require('./middlewares/auth'));
 app.use(require('./routes'));
 
 app.listen(port, () => {
