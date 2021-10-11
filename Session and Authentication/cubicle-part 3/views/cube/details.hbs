@@ -6,17 +6,21 @@
     <p><span>Difficulty level:</span>{{difficulty}}</p>
     <a class="btn" href="/">Back</a>
     <a class="btn" href="/cube/{{_id}}/accessory/attach">Add accessory</a>
+    {{#if creator}}
+      <a class="btn" href="/cube/{{_id}}/edit">Edit</a>
+      <a class="btn" href="/cube/{{_id}}/delete">Delete</a>
+    {{/if}}
   </div>
   <h2>Accessories</h2>
   <div class="accessories">
     {{#each accessories}}
-      <div class="accessory">
-        <img src="{{imageUrl}}" alt="{{name}}">
-        <h3>{{name}}</h3>
-        <p>{{description}}</p>
-      </div>
+    <div class="accessory">
+      <img src="{{imageUrl}}" alt="{{name}}">
+      <h3>{{name}}</h3>
+      <p>{{description}}</p>
+    </div>
     {{else}}
-      <h3 class="italic">This cube has no accessories yet...</h3>
+    <h3 class="italic">This cube has no accessories yet...</h3>
     {{/each}}
   </div>
 </main>

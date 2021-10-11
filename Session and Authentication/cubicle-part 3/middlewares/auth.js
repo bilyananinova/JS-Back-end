@@ -5,6 +5,10 @@ let secret = 'mysupersecretsecret';
 function auth(req, res, next) {
     let token = req.cookies.jwt;
 
+    if (!token) {
+        return next();
+    }
+
     jswt.verify(token, secret, function (err, decoded) {
 
         if (decoded) {
@@ -18,4 +22,4 @@ function auth(req, res, next) {
     });
 };
 
-module.exports = auth;
+module.exports = { auth };

@@ -1,29 +1,29 @@
 let Cube = require('../models/Cube.js');
 
-async function getAll() {
-    return await Cube.find({}).lean();
+function getAll() {
+    return Cube.find({}).lean()
 }
 
-async function getById(id) {
-    return await Cube.findById(id).populate('accessories').lean();
+function getById(id) {
+    return Cube.findById(id).populate('accessories').lean();
 }
 
-async function create(name, description, imageUrl, difficulty) {
-    let cube = await new Cube({ name, description, imageUrl, difficulty });
+function create(name, description, imageUrl, difficulty, creatorId) {
+    let cube = new Cube({ name, description, imageUrl, difficulty, creatorId });
     return cube.save();
 }
 
-async function attach(cubeId, accId) {
-    let cube = await Cube.findById(cubeId);
+function attach(cubeId, accId) {
+    let cube = Cube.findById(cubeId);
     cube.accessories.push(accId);
     return cube.save();
 }
 
-async function search(query) {
+function search(query) {
     let { search, from, to } = query;
 
-    let cubes = await Cube.find().lean();
-    
+    let cubes = Cube.find().lean();
+
     if (search) {
         cubes = cubes.filter(c => c.name.toLowerCase().includes(search.toLowerCase()));
     }

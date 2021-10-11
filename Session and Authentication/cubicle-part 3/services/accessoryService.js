@@ -7,8 +7,8 @@ function getAll() {
         })
 }
 
-async function getAllWithout(id) {
-    let acc = await Accessory.find({})
+function getAllWithout(id) {
+    let acc = Accessory.find({})
         .where('_id')
         .nin(id)
         .lean()

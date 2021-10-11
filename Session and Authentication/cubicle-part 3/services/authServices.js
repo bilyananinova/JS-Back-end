@@ -9,21 +9,20 @@ function register(username, password) {
         .then(hash => {
             let user = new User({ username, password: hash });
             return user.save();
-        })
+        });
 };
 
 function login(username, password) {
     return User.findOne({ username })
-        .then(user => {
-            let comp = bcrypt.compare(password, user.password)
-
-            if(comp) {
+        .then(user => Promise.all([bcrypt.compare(password, user.password), user]))
+        .then(([comp, user]) => {
+            if (comp) {
                 return user;
+            } else {
+                throw { message: 'Cannot find username or password' }
             }
-
         })
-
-}
+};
 
 module.exports = {
     register,

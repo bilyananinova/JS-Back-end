@@ -7,9 +7,10 @@ let port = 3000;
 require('./config/express.js')(app);
 require('./config/exphbs.js')(app);
 require('./config/database.js')(app);
+let { auth } = require('./middlewares/auth');
 
 app.use(cookieParser());
-app.use(require('./middlewares/auth'));
+app.use(auth);
 app.use(require('./routes'));
 
 app.listen(port, () => {

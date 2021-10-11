@@ -4,10 +4,14 @@ let router = express.Router({ mergeParams: true });
 let { getById, attach } = require('../services/cubeServices.js');
 let { getAllWithout } = require('../services/accessoryService.js');
 
-router.get('/attach', async (req, res) => {
-    let cube = await getById(req.params.id);
-    let accessories = await getAllWithout(cube.accessories.map(acc => acc._id));
-    res.render('accessory/attachAccessory', { ...cube, accessories });
+router.get('/attach', (req, res) => {
+    getById(req.params.id)
+        .then(cube => {
+            getAllWithout(cube.accessories.map(acc => acc._id))
+                .then(accessories => {
+                    res.render('accessory/attachAccessory', { ...cube, accessories });
+                });
+        });
 });
 
 router.post('/attach', (req, res) => {
