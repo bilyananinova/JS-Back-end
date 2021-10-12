@@ -18,6 +18,8 @@ function isLogged(req, res, next) {
             }
         }
 
+        res.locals.user = res.user;
+
     });
 
     next();
