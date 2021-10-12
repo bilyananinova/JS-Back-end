@@ -1,11 +1,10 @@
 let express = require('express');
 let router = express.Router();
 
-let { create, getById } = require('../services/cubeServices.js');
+let { create, getById, edit } = require('../services/cubeServices.js');
 let cubeAccController = require('./cubeAccController.js');
-let { auth } = require('../middlewares/auth');
 
-router.get('/create', auth, (req, res) => {
+router.get('/create', (req, res) => {
     res.render('cube/create');
 });
 
@@ -22,8 +21,24 @@ router.post('/create', (req, res) => {
 router.get('/details/:id', (req, res) => {
     getById(req.params.id)
         .then(cube => {
-            res.render('cube/details', { ...cube });
+            let creator = res.user._id == cube.creatorId
+            res.render('cube/details', { ...cube, creator });
         });
+});
+
+router.get('/:id/edit', (req, res) => {
+    getById(req.params.id)
+        .then(cube => {
+            res.render('cube/edit', { ...cube });
+        });
+});
+
+router.post('/:id/edit', (req, res) => {
+    let { name, description, imageUrl, difficulty } = req.body;
+
+    edit(req.params.id, name, description, imageUrl, difficulty);
+    res.redirect(`/cube/details/${req.params.id}`)
+
 });
 
 router.use('/:id/accessory', cubeAccController);

@@ -17,6 +17,7 @@ router.get('/about', (req, res) => {
 router.get('/search', (req, res) => {
     search(req.query)
         .then(cubes => {
+            console.log(cubes);
             res.render('index', { cubes });
         });
 });

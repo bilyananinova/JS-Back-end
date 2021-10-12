@@ -19,6 +19,13 @@ function attach(cubeId, accId) {
     return cube.save();
 }
 
+function edit(id, name, description, imageUrl, difficulty) {
+    Cube.findByIdAndUpdate(id, { name, description, imageUrl, difficulty }, { runValidators: true })
+        .then(cube => {
+            return cube;
+        });
+}
+
 function search(query) {
     let { search, from, to } = query;
 
@@ -44,5 +51,6 @@ module.exports = {
     getById,
     create,
     attach,
+    edit,
     search
 }
