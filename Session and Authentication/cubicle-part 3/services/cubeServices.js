@@ -26,6 +26,10 @@ function edit(id, name, description, imageUrl, difficulty) {
         });
 }
 
+function deleteCube(id) {
+    return Cube.findByIdAndDelete(id);
+}
+
 function search(query) {
     let { search, from, to } = query;
 
@@ -52,5 +56,6 @@ module.exports = {
     create,
     attach,
     edit,
+    deleteCube,
     search
 }

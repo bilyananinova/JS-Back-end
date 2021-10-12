@@ -1,7 +1,7 @@
 let express = require('express');
 let router = express.Router();
 
-let { create, getById, edit } = require('../services/cubeServices.js');
+let { create, getById, edit, deleteCube } = require('../services/cubeServices.js');
 let cubeAccController = require('./cubeAccController.js');
 
 router.get('/create', (req, res) => {
@@ -39,6 +39,20 @@ router.post('/:id/edit', (req, res) => {
     edit(req.params.id, name, description, imageUrl, difficulty);
     res.redirect(`/cube/details/${req.params.id}`)
 
+});
+
+router.get('/:id/delete', (req, res) => {
+    getById(req.params.id)
+        .then(cube => {
+            res.render('cube/delete', { ...cube })
+        });
+});
+
+router.post('/:id/delete', (req, res) => {
+    deleteCube(req.params.id)
+        .then(() => {
+            res.redirect('/');
+        })
 });
 
 router.use('/:id/accessory', cubeAccController);
