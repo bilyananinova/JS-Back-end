@@ -33,21 +33,26 @@ function deleteCube(id) {
 function search(query) {
     let { search, from, to } = query;
 
-    let cubes = Cube.find().lean();
+    return Cube.find().lean()
+        .then(cubes => {
 
-    if (search) {
-        cubes = cubes.filter(c => c.name.toLowerCase().includes(search.toLowerCase()));
-    }
+            if (search) {
+                cubes = cubes.filter(c => c.name.toLowerCase().includes(search.toLowerCase()));
+            }
 
-    if (from) {
-        cubes = cubes.filter(c => c.difficulty >= from);
-    }
 
-    if (to) {
-        cubes = cubes.filter(c => c.difficulty <= to);
-    }
+            if (from) {
+                cubes = cubes.filter(c => c.difficulty >= from);
+            }
 
-    return cubes;
+
+            if (to) {
+                cubes = cubes.filter(c => c.difficulty <= to);
+            }
+
+            return cubes;
+        });
+
 }
 
 module.exports = {
