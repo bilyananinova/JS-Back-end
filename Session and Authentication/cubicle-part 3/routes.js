@@ -7,8 +7,8 @@ let accessoryController = require('./controllers/accessoryController.js');
 let authController = require('./controllers/authController.js');
 
 router.use('/', homeController);
-router.use('/cube', cubeController);
-router.use('/accessory', accessoryController);
+router.use('/cube',  cubeController);
+router.use('/accessory',  accessoryController);
 router.use('/user', authController);
 router.get('*', (req, res) => {
     res.render('404');
