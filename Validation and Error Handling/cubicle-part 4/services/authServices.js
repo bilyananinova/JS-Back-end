@@ -2,16 +2,16 @@ let User = require('../models/User');
 let bcrypt = require('bcrypt');
 
 function register(username, password) {
-    
+
     return User.findOne({ username })
-    .then(user => {
-        if(user) {
-            throw new Error('Wrong username or password');
-        } else {
-            return User.create({ username, password });
-        }
-    })
-    
+        .then(user => {
+            if (user) {
+                throw new Error('This username is already taken');
+            } else {
+                return User.create({ username, password });
+            }
+        })
+
 };
 
 function login(username, password) {

@@ -11,6 +11,7 @@ require('./config/database.js')(app);
 app.use(cookieParser());
 app.use(require('./middlewares/isLogged'));
 app.use(require('./routes'));
+app.use(require('./middlewares/errorHandling'));
 
 app.listen(port, () => {
     console.log(`App is running on port ${port}...`);

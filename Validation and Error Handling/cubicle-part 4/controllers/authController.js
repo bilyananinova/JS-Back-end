@@ -3,6 +3,7 @@ let router = express.Router({ mergeParams: true });
 
 let { register, login } = require('../services/authServices');
 let { createToken } = require('../utils/jswToken');
+let notifications = require('../middlewares/notifications');
 
 router.get('/register', (req, res) => {
     res.render('user/register');
@@ -11,12 +12,9 @@ router.get('/register', (req, res) => {
 router.post('/register', (req, res, next) => {
     let { username, password, repeatPassword } = req.body;
 
-    if (password !== repeatPassword) {
-        res.render('user/register', { error: 'Passwords mismatch' });
-    }
-
-    if (username == '', password == '', repeatPassword = '') {
-        res.render('user/register', { error: 'All fields are required' });
+    if(password !== repeatPassword) {
+        next(['Passwords missmatch'])
+        return res.render('user/register', {username, password});
     }
 
     register(username, password)
@@ -27,8 +25,9 @@ router.post('/register', (req, res, next) => {
             res.cookie('jwt', token, { httpOnly: true });
             res.redirect('/');
         })
-        .catch((err) => {
-            res.render('user/register', { error: err.message });
+        .catch(err => {
+            next(notifications(err));
+            res.render('user/register', {username, password});
         })
 });
 
@@ -36,12 +35,8 @@ router.get('/login', (req, res) => {
     res.render('user/login');
 });
 
-router.post('/login', (req, res) => {
+router.post('/login', (req, res, next) => {
     let { username, password } = req.body;
-
-    if (username == '', password == '') {
-        res.render('user/login', { error: 'All fields are required' });
-    }
 
     login(username, password)
         .then(user => {
@@ -51,8 +46,9 @@ router.post('/login', (req, res) => {
             res.cookie('jwt', token, { httpOnly: true });
             res.redirect('/');
         })
-        .catch((err) => {
-            res.render('user/login', { error: err.message });
+        .catch(err => {
+            next([err.message]);
+            res.render('user/login');
         })
 });
 

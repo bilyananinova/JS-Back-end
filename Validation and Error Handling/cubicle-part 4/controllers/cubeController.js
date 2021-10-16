@@ -4,21 +4,28 @@ let router = express.Router();
 let { create, getById, edit, deleteCube } = require('../services/cubeServices.js');
 let cubeAccController = require('./cubeAccController.js');
 let isAuth = require('../middlewares/isAuth');
+let notifications = require('../middlewares/notifications');
 
 router.get('/create', (req, res) => {
     res.render('cube/create');
 });
 
-router.post('/create', (req, res) => {
+router.post('/create', (req, res, next) => {
     let { name, description, imageUrl, difficulty } = req.body;
     let creatorId = res.user._id;
+
+    if (name == '', description == '', imageUrl == '') {
+        next(['All fields are required!']);
+        return res.render('cube/create', { name, description, imageUrl, difficulty });
+    }
 
     create(name, description, imageUrl, difficulty, creatorId)
         .then(cube => {
             res.redirect('/');
         })
         .catch(err => {
-            res.render('cube/create', { error: err.message });
+            next(notifications(err));
+            res.render('cube/create', { name, description, imageUrl, difficulty });
         });
 });
 
