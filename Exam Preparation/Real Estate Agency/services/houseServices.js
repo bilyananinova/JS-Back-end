@@ -12,6 +12,10 @@ exports.create = function (homeName, type, year, city, homeImage, description, a
     return House.create({ homeName, type, year, city, homeImage, description, availablePieces, creator });
 }
 
+exports.deleteHome = function (id) {
+    return House.findByIdAndDelete(id);
+}
+
 exports.rent = async function (houseId, id) {
     let house = await House.findById(houseId);
     house.rented.push(id);

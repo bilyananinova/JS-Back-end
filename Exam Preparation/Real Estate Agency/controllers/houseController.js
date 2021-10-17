@@ -1,7 +1,7 @@
 let express = require('express');
 let router = express.Router();
 
-let { getAll, getOne, create, rent } = require('../services/houseServices');
+let { getAll, getOne, create, deleteHome, rent } = require('../services/houseServices');
 
 router.get('/housing-for-rent', async (req, res) => {
 
@@ -50,6 +50,18 @@ router.get('/:id/rent', async (req, res) => {
         await rent(req.params.id, req.user.id);
         
         res.redirect(`/houses/${req.params.id}/details`);
+
+    } catch (err) {
+        console.log(err);
+    }
+});
+
+router.get('/:id/delete', async (req, res) => {
+
+    try {
+        await deleteHome(req.params.id);
+
+        res.redirect('/houses/housing-for-rent');
 
     } catch (err) {
         console.log(err);
