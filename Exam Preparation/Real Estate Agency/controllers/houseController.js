@@ -1,7 +1,19 @@
 let express = require('express');
 let router = express.Router();
 
-let { create } = require('../services/houseServices');
+let { getAll, getOne, create, rent } = require('../services/houseServices');
+
+router.get('/housing-for-rent', async (req, res) => {
+
+    try {
+        let houses = await getAll();
+
+        res.render('aprt-for-recent', { houses });
+
+    } catch (err) {
+        console.log(err);
+    }
+});
 
 router.get('/create-offer', (req, res) => {
     res.render('create', { title: 'Create Page' });
@@ -19,6 +31,29 @@ router.post('/create-offer', async (req, res) => {
     }
 });
 
+router.get('/:id/details', async (req, res) => {
+    try {
+        let house = await getOne(req.params.id);
+        let creator = house.creator == req.user.id;
+        let rents = house.rented.map( h => h.name).join(', ');
 
+        res.render('details', { ...house, creator, rents });
+
+    } catch (err) {
+        console.log(err);
+    }
+});
+
+router.get('/:id/rent', async (req, res) => {
+
+    try {
+        await rent(req.params.id, req.user.id);
+        
+        res.redirect(`/houses/${req.params.id}/details`);
+
+    } catch (err) {
+        console.log(err);
+    }
+});
 
 module.exports = router;
