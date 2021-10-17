@@ -1,7 +1,7 @@
 let express = require('express');
 let router = express.Router();
 
-let { getAll, getOne, create, deleteHome, rent } = require('../services/houseServices');
+let { getAll, getOne, create, edit, deleteHome, rent } = require('../services/houseServices');
 
 router.get('/housing-for-rent', async (req, res) => {
 
@@ -35,9 +35,9 @@ router.get('/:id/details', async (req, res) => {
     try {
         let house = await getOne(req.params.id);
         let creator = house.creator == req.user.id;
-        let rents = house.rented.map( h => h.name).join(', ');
+        let rents = house.rented.map(h => h.name).join(', ');
 
-        res.render('details', { ...house, creator, rents });
+        res.render('details', { title: 'Details Page', ...house, creator, rents });
 
     } catch (err) {
         console.log(err);
@@ -48,7 +48,7 @@ router.get('/:id/rent', async (req, res) => {
 
     try {
         await rent(req.params.id, req.user.id);
-        
+
         res.redirect(`/houses/${req.params.id}/details`);
 
     } catch (err) {
@@ -62,6 +62,32 @@ router.get('/:id/delete', async (req, res) => {
         await deleteHome(req.params.id);
 
         res.redirect('/houses/housing-for-rent');
+
+    } catch (err) {
+        console.log(err);
+    }
+});
+
+router.get('/:id/edit', async (req, res) => {
+
+    try {
+        let house = await getOne(req.params.id);
+
+        res.render('edit', { title: 'Edit Page', ...house });
+
+    } catch (err) {
+        console.log(err);
+    }
+});
+
+router.post('/:id/edit', async (req, res) => {
+    let { homeName, type, year, city, homeImage, description, availablePieces } = req.body;
+    try {
+        let homeid = req.params.id;
+        
+        await edit(homeid, homeName, type, year, city, homeImage, description, availablePieces);
+
+        res.redirect(`/houses/${req.params.id}/details`);
 
     } catch (err) {
         console.log(err);

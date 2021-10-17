@@ -12,13 +12,23 @@ exports.create = function (homeName, type, year, city, homeImage, description, a
     return House.create({ homeName, type, year, city, homeImage, description, availablePieces, creator });
 }
 
+exports.edit = function (id, homeName, type, year, city, homeImage, description, availablePieces) {
+
+    return House.findByIdAndUpdate(id,
+        {homeName, type, year, city, homeImage, description, availablePieces}
+    );
+}
+
 exports.deleteHome = function (id) {
     return House.findByIdAndDelete(id);
 }
 
 exports.rent = async function (houseId, id) {
+
     let house = await House.findById(houseId);
+
     house.rented.push(id);
     house.availablePieces--;
+
     return house.save();
 }
