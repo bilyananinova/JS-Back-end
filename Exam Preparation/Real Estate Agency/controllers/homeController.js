@@ -1,8 +1,18 @@
 let express = require('express');
 let router = express.Router();
 
-router.get('/', (req, res) => {
-    res.render('home', { title: 'Home page' });
+let { getAll } = require('../services/houseServices');
+
+router.get('/', async (req, res) => {
+    try {
+        let houses = await getAll();
+        houses = houses.slice(-3);
+
+        res.render('home', { title: 'Home page', houses });
+
+    } catch (err) {
+        console.log(err);
+    }
 });
 
 module.exports = router;

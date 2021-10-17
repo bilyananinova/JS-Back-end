@@ -8,5 +8,8 @@ let houseController = require('./controllers/houseController');
 router.use('/', homeController);
 router.use('/user', authController);
 router.use('/house', houseController);
+router.get('*', (req, res) => {
+    res.render('404', { title: 'Not Found Page' });
+})
 
 module.exports = router;

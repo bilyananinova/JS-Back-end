@@ -8,7 +8,7 @@ exports.auth = function (req, res, next) {
         let decoded = jwt.verify(token, secret);
         req.user = decoded;
         res.locals.user = req.user;
-    } 
+    }
 
     next();
 }
