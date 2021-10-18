@@ -1,14 +1,27 @@
 let jwt = require('jsonwebtoken');
-let secret = 'mysecret';
+let { SECRET, TOKEN } = require('../config/constants');
 
 exports.auth = function (req, res, next) {
-    let token = req.cookies.jwt;
+    let token = req.cookies[TOKEN];
 
-    if (token) {
-        let decoded = jwt.verify(token, secret);
-        req.user = decoded;
-        res.locals.user = req.user;
+    if (!token) {
+        return next();
     }
 
-    next();
+    if (token) {
+
+        let decoded = jwt.verify(token, SECRET);
+
+        req.user = decoded;
+        res.locals.user = decoded;
+
+        next();
+    }
+
+}
+
+exports.isAuth = function (req, res, next) {
+    if (req.user) {
+        next();
+    }
 }

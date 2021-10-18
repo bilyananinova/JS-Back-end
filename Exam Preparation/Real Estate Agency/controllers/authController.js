@@ -2,6 +2,7 @@ let express = require('express');
 let router = express.Router();
 
 let { register, login, jsonWebToken } = require('../services/authService');
+let { TOKEN } = require('../config/constants');
 
 router.get('/register', (req, res) => {
 
@@ -14,21 +15,21 @@ router.post('/register', async (req, res) => {
     let { name, username, password, rePassword } = req.body;
 
     if (password !== rePassword) {
-        throw new Error('Passwords missmatch!');
+        res.locals.errors = ['Passwords missmatch!'];
+        return res.render('register', { title: 'Register page' });
     }
 
     try {
-        let user = register(name, username, password);
-
+        let user = await register(name, username, password);
         let token = jsonWebToken(user);
 
-        res.cookie('jwt', token, { httpOnly: true });
-
+        res.cookie(TOKEN, token, { httpOnly: true });
         res.redirect('/');
+ 
+    } catch (error) {
 
-    } catch (err) {
-        console.log(err);
-    }
+        console.log(error);
+    } 
 });
 
 router.get('/login', (req, res) => {
@@ -43,12 +44,11 @@ router.post('/login', async (req, res) => {
 
     try {
         let user = await login(username, password);
-        
         let token = jsonWebToken(user);
 
-        res.cookie('jwt', token, { httpOnly: true });
-
+        res.cookie(TOKEN, token, { httpOnly: true });
         res.redirect('/');
+
     } catch (err) {
         console.log(err);
     }
@@ -56,7 +56,7 @@ router.post('/login', async (req, res) => {
 
 router.get('/logout', (req, res) => {
 
-    res.clearCookie('jwt');
+    res.clearCookie(TOKEN);
     res.redirect('/');
 });
 

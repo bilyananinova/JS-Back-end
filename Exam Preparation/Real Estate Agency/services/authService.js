@@ -1,24 +1,34 @@
 let User = require('../models/User');
 let jwt = require('jsonwebtoken');
-let bcrypt = require('bcrypt');
 
-let secret = 'mysecret';
+let { SECRET } = require('../config/constants');
 
 exports.register = function (name, username, password) {
-    return User.create({ name, username, password });
+    try {
+
+        return User.create({ name, username, password });
+
+    } catch (err) {
+
+        return err;
+    }
 }
 
-exports.login = function (username, password) {
+exports.login = async function (username, password) {
 
-    return User.findOne({ username })
-        .then(user => Promise.all([bcrypt.compare(password, user.password), user]))
-        .then(([match, user]) => {
-            if(match) {
-                return user;
-            } else {
-                throw new Error('Wrong username or password');
-            }
-        });
+    let user = await User.findOne({ username });
+
+    if (!user) {
+        throw new Error('Wrong username or password!');
+    }
+
+    let match = await user.validatePass(password);
+
+    if (!match) {
+        throw new Error('Wrong username or password!');
+    }
+
+    return user;
 }
 
 exports.jsonWebToken = function (user) {
@@ -29,7 +39,7 @@ exports.jsonWebToken = function (user) {
         name: user.name
     };
 
-    return jwt.sign(payload, secret, {
+    return jwt.sign(payload, SECRET, {
         expiresIn: '1h'
     });
 }

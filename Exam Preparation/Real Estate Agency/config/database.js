@@ -1,7 +1,8 @@
 let mongoose = require('mongoose');
+let { CONNECTION_STRING } = require('../config/constants');
 
 function initDb() {
-    return mongoose.connect('mongodb://localhost:27017/agency');
+    return mongoose.connect(CONNECTION_STRING);
 }
 
 module.exports = initDb;

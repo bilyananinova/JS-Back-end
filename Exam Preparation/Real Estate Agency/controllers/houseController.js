@@ -25,7 +25,7 @@ router.post('/create-offer', async (req, res) => {
 
     try {
         await create(homeName, type, year, city, homeImage, description, availablePieces, creator);
-        res.redirect('/house/housing-for-rent')
+        res.redirect('/houses/housing-for-rent')
     } catch (err) {
         console.log(err);
     }
@@ -84,8 +84,7 @@ router.post('/:id/edit', async (req, res) => {
     let { homeName, type, year, city, homeImage, description, availablePieces } = req.body;
     try {
         let homeid = req.params.id;
-        
-        await edit(homeid, homeName, type, year, city, homeImage, description, availablePieces);
+        await edit(req.params.id, homeName, type, year, city, homeImage, description, availablePieces);
 
         res.redirect(`/houses/${req.params.id}/details`);
 
