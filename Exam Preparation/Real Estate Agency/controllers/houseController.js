@@ -36,8 +36,9 @@ router.get('/:id/details', async (req, res) => {
         let house = await getOne(req.params.id);
         let creator = house.creator == req.user.id;
         let rents = house.rented.map(h => h.name).join(', ');
+        let inRented = house.rented.find(r => r._id == req.user.id)
 
-        res.render('details', { title: 'Details Page', ...house, creator, rents });
+        res.render('details', { title: 'Details Page', ...house, creator, rents, inRented });
 
     } catch (err) {
         console.log(err);
