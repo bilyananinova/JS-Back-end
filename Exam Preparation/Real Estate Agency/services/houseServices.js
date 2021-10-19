@@ -15,7 +15,8 @@ exports.create = function (homeName, type, year, city, homeImage, description, a
 exports.edit = function (id, homeName, type, year, city, homeImage, description, availablePieces) {
 
     return House.findByIdAndUpdate(id,
-        { homeName, type, year, city, homeImage, description, availablePieces }, { runValidators: true }
+        { homeName, type, year, city, homeImage, description, availablePieces },
+        { runValidators: true }
     );
 }
 

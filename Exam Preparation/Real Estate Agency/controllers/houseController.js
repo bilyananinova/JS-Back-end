@@ -33,16 +33,12 @@ router.post('/create-offer', async (req, res) => {
 
 router.get('/:id/details', async (req, res) => {
     try {
-        if (req.user) {
             let house = await getOne(req.params.id);
-            let creator = house.creator == req.user.id;
+            let creator = house.creator == req.user?.id;
             let rents = house.rented.map(h => h.name).join(', ');
-            let inRented = house.rented.find(r => r._id == req.user.id)
+            let inRented = house.rented.find(r => r._id == req.user?.id);
 
             res.render('details', { title: 'Details Page', ...house, creator, rents, inRented });
-        } else {
-            res.render('details', { title: 'Details Page' });
-        }
 
     } catch (err) {
         console.log(err);
@@ -87,9 +83,11 @@ router.get('/:id/edit', async (req, res) => {
 
 router.post('/:id/edit', async (req, res) => {
     let { homeName, type, year, city, homeImage, description, availablePieces } = req.body;
+    let homeId = req.params.id;
+    
     try {
-        let homeid = req.params.id;
-        await edit(req.params.id, homeName, type, year, city, homeImage, description, availablePieces);
+
+        await edit(homeId, homeName, type, year, city, homeImage, description, availablePieces);
 
         res.redirect(`/houses/${req.params.id}/details`);
 
