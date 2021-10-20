@@ -26,12 +26,13 @@ exports.deleteHome = function (id) {
 
 exports.rent = function (houseId, id) {
 
-    let house = House.findById(houseId);
-
-    house.rented.push(id);
-    house.availablePieces--;
-
-    return house.save();
+    return House.findByIdAndUpdate(
+        houseId,
+        {
+            $push: {rented: id},
+            $inc: { availablePieces: -1 }
+        }
+    );
 }
 
 exports.search = function (text) {
