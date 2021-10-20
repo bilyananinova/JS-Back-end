@@ -3,7 +3,7 @@ let router = express.Router();
 
 let { register, login, jsonWebToken } = require('../services/authService');
 let { TOKEN } = require('../config/constants');
-let { errorHandller } = require('../middlewares/errorHandller');
+let { errorHandller } = require('../utils/errorHandller');
 
 router.get('/register', (req, res) => {
 
@@ -32,7 +32,7 @@ router.post('/register', async (req, res, next) => {
     }
 });
 
-router.get('/login', (req, res) => {
+router.get('/login',  (req, res) => {
 
     res.render('login', { title: 'Login page' });
 
@@ -54,7 +54,7 @@ router.post('/login', async (req, res) => {
     }
 });
 
-router.get('/logout', (req, res) => {
+router.get('/logout',  (req, res) => {
 
     res.clearCookie(TOKEN);
     res.redirect('/');

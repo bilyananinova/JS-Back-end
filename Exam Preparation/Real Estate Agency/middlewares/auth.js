@@ -23,5 +23,5 @@ exports.auth = function (req, res, next) {
 exports.isAuth = function (req, res, next) {
     if (req.user) {
         next();
-    }
+    } 
 }

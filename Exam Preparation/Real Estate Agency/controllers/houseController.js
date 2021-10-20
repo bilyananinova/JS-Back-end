@@ -2,7 +2,9 @@ let express = require('express');
 let router = express.Router();
 
 let { getAll, getOne, create, edit, deleteHome, rent } = require('../services/houseServices');
-let { errorHandller } = require('../middlewares/errorHandller');
+let { errorHandller } = require('../utils/errorHandller');
+let { isOwner } = require('../middlewares/isOwner');
+let { isAuth } = require('../middlewares/auth');
 
 router.get('/housing-for-rent', async (req, res) => {
 
@@ -16,19 +18,19 @@ router.get('/housing-for-rent', async (req, res) => {
     }
 });
 
-router.get('/create-offer', (req, res) => {
+router.get('/create-offer', isAuth, (req, res) => {
     res.render('create', { title: 'Create Page' });
 });
 
-router.post('/create-offer', async (req, res) => {
-   
+router.post('/create-offer', isAuth, async (req, res) => {
+
     let { homeName, type, year, city, homeImage, description, availablePieces } = req.body;
     let creator = req.user.id;
 
     try {
 
         await create(homeName, type, year, city, homeImage, description, availablePieces, creator);
-       
+
         res.redirect('/houses/housing-for-rent');
 
     } catch (error) {
@@ -51,7 +53,7 @@ router.get('/:id/details', async (req, res) => {
     }
 });
 
-router.get('/:id/rent', async (req, res) => {
+router.get('/:id/rent', isOwner,async (req, res) => {
 
     try {
 
@@ -64,7 +66,7 @@ router.get('/:id/rent', async (req, res) => {
     }
 });
 
-router.get('/:id/delete', async (req, res) => {
+router.get('/:id/delete', isOwner,async (req, res) => {
 
     try {
 
@@ -77,7 +79,7 @@ router.get('/:id/delete', async (req, res) => {
     }
 });
 
-router.get('/:id/edit', async (req, res) => {
+router.get('/:id/edit', isOwner, async (req, res) => {
 
     try {
 
@@ -90,8 +92,8 @@ router.get('/:id/edit', async (req, res) => {
     }
 });
 
-router.post('/:id/edit', async (req, res) => {
-    
+router.post('/:id/edit', isOwner, async (req, res) => {
+
     let { homeName, type, year, city, homeImage, description, availablePieces } = req.body;
     let homeId = req.params.id;
 
