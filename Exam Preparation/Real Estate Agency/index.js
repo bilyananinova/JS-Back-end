@@ -12,7 +12,7 @@ require('./config/database.js')(app);
 
 app.use(cookieParser());
 app.use(auth);
-app.use(router)
+app.use(router);
 
 app.listen(PORT, () => {
     console.log(`App is running on port ${PORT}...`);

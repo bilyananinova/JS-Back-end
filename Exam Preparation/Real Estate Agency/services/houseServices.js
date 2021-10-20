@@ -24,12 +24,18 @@ exports.deleteHome = function (id) {
     return House.findByIdAndDelete(id);
 }
 
-exports.rent = async function (houseId, id) {
+exports.rent = function (houseId, id) {
 
-    let house = await House.findById(houseId);
+    let house = House.findById(houseId);
 
     house.rented.push(id);
     house.availablePieces--;
 
     return house.save();
+}
+
+exports.search = function (text) {
+    return House.find({
+        type: { $regex: text || '', $options: 'i' }
+    }).lean();
 }

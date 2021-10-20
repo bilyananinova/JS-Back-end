@@ -1,7 +1,7 @@
 let express = require('express');
 let router = express.Router();
 
-let { getAll } = require('../services/houseServices');
+let { getAll, search } = require('../services/houseServices');
 
 router.get('/', async (req, res) => {
     try {
@@ -13,6 +13,14 @@ router.get('/', async (req, res) => {
     } catch (err) {
         console.log(err);
     }
+});
+
+router.get('/search', async (req, res) => {
+
+    let houses = await search(req.query.search);
+
+    res.render('search', { title: 'Search Page', houses });
+
 });
 
 module.exports = router;
