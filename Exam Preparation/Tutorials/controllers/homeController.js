@@ -8,5 +8,4 @@ router.get('/', async (req, res) => {
     res.render('home', { title: 'Home Page', courses })
 });
 
-
 module.exports = router;

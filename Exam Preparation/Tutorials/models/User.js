@@ -17,8 +17,8 @@ let userSchema = new mongoose.Schema({
     },
     enrolledCourses: [
         {
-            type: mongoose.Types.ObjectId,
-            ref: "Course",
+            type: mongoose.Types.ObjectId, 
+            ref: "Course"
         }
     ],
     creator: {

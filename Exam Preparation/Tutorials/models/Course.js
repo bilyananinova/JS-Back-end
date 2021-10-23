@@ -41,7 +41,7 @@ let courseSchema = new mongoose.Schema({
 courseSchema.pre('save', function (next) {
     let date = Date.now();
     this.createdAt = moment(date).format('DD/MM/YYYY');
-    return next()
-})
+    return next();
+});
 
 module.exports = mongoose.model('Course', courseSchema);
