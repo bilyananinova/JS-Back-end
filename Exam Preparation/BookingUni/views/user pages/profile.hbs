@@ -1,0 +1,22 @@
+{{#with profile}}
+<section id="viewhotelDetails">
+    <div class="profile"><img src="/img/profile.png" alt="default user">
+        <h3>User Info:</h3>
+        <div class="flex">
+            <p>Username: </p>
+            <p>{{username}}</p>
+        </div>
+        <div class="flex">
+            <p>Email: </p>
+            <p>{{email}}</p>
+        </div>
+        <div class="flex">
+            <p>Reservations: </p>
+            <p>
+                {{#each bookedHotels}}<span>{{hotel}} </span> {{#unless @last}},{{/unless}} {{/each}}
+
+            </p>
+        </div>
+    </div>
+</section>
+{{/with}}
