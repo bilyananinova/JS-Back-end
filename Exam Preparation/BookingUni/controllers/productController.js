@@ -24,7 +24,6 @@ router.post('/create', isAuth, async (req, res) => {
         } else {
             res.locals.errors = [error.message];
         }
-        console.log(error);
         res.render('booking pages/create', { hotel, city, freeRooms, imgUrl });
     }
 });

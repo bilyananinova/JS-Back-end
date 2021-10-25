@@ -18,7 +18,7 @@
                     <li><a href="/">Home</a></li>
                     <li><a href="/hotel/create">Add +</a></li>
                 </ul>
-            </div> 
+            </div>
             <div class="right-container">
                 <a href="/profile/{{user.username}}" class="log-out">{{user.username}}</a>
                 <a href="/user/logout" class="log-out">Logout</a>
@@ -33,6 +33,12 @@
             </div>
             {{/if}}
         </nav>
+
+        {{#each errors}}
+        <div class="notification errorBox">
+            <span>{{this}}</span>
+        </div>
+        {{/each}}
 
         {{{body}}}
 
